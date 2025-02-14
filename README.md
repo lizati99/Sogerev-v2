@@ -1,3 +1,29 @@
+# Description
+# Sogerev Project
+
+This project is a comprehensive inventory and sales management system designed to streamline the entire process of purchasing, stock management, and sales operations. It provides an integrated solution for businesses that need to efficiently manage their supply chain, from procurement with suppliers to the final delivery step with invoices.
+
+# Key Features
+# 1 - Supplier Management :
+Manage supplier information, including contact details, product catalogs, and pricing.
+Track orders placed with suppliers and monitor delivery statuses.
+# 2 - Inventory Management :
+Maintain an accurate record of stock levels for all products.
+Automatically update inventory after purchases or sales.
+Generate alerts for low stock levels and reordering needs.
+# 3 - Purchase Orders :
+Create and manage purchase orders for ordering goods from suppliers.
+Monitor the status of each order, from initiation to receipt.
+# 4 - Sales Management :
+Handle customer orders and generate sales invoices.
+Support multiple payment methods and track payment statuses.
+# 5 - Delivery Process :
+Generate delivery notes (Bon de Livraison) for each sale.
+Ensure that the correct items are delivered to customers with corresponding invoices.
+# 6 - Reporting and Analytics :
+Provide detailed reports on sales performance, inventory turnover, and supplier transactions.
+Enable data-driven decision-making through analytics dashboards.
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
