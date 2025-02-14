@@ -1,0 +1,20 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class Category extends Model
+{
+    use HasFactory;
+
+    protected $fillable = ['libelle', 'description'];
+
+    // public function subCategories(){
+    //     return $this->hasMany(SubCategory::class, 'categorie_id');
+    // }
+    // public function products(){
+    //     return $this->hasMany(Product::class, 'categorie_id');
+    // }
+}
