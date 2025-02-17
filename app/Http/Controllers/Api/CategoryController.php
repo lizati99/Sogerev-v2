@@ -4,28 +4,53 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use Exception;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
     public function index()
     {
-        return Category::all();
+        try {
+            $categories = Category::all();
+            if ($categories->isEmpty()) {
+                return response()->json([
+                    'message' => 'Aucune catégorie trouvée.',
+                    'categries' => []
+                ], 200);
+            }
+            return response()->json([
+                'message' => 'Liste de toutes les catégories avec succès',
+                'categries' => $categories
+            ], 200);
+        } catch (Exception $exception) {
+            return response()->json([
+                'message' => 'Erreur lors de la récupération de toutes les catégories : ' . $exception->getMessage()
+            ], 500);
+        }
     }
 
     public function store(Request $request)
     {
+        $request->validate([
+            'libelle' =>'string|max:255',
+        ]);
         $category = Category::create($request->all());
         return response()->json($category, 201);
     }
 
     public function show(Category $category)
     {
+        $category = Category::findOrFail($category);
         return $category;
     }
 
     public function update(Request $request, Category $category)
     {
+        $category = Category::findOrFail($category);
+        $request->validate([
+            'libelle' =>'string|max:255',
+        ]);
         $category->update($request->all());
         return response()->json($category, 200);
     }

@@ -15,13 +15,13 @@ class Stock extends Model
         'product_id',
     ];
 
-    // public function receptions()
-    // {
-    //     return $this->hasMany(Reception::class);
-    // }
-    // public function deliveries(){
-    //     return $this->hasMany(Delivery::class);
-    // }
+    public function receptions()
+    {
+        return $this->hasMany(Reception::class);
+    }
+    public function deliveries(){
+        return $this->hasMany(Delivery::class);
+    }
 
     public function products(){
         return $this->hasMany(Product::class);
