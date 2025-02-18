@@ -11,9 +11,9 @@ class PurchaseOrder extends Model
 
     protected $fillable = [
         'purchase_date',
+        'total_amount',
         'supplier_id',
         'payment_type_id',
-        'total_amount'
     ];
 
     public function paymentType(){
