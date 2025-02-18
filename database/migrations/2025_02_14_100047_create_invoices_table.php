@@ -19,9 +19,11 @@ return new class extends Migration
             $table->double('total_HT');
             $table->double('total_TVA');
             $table->double('total_TTC');
+            $table->double('tva_rate');
             $table->string('payment_status');
             $table->foreignId('from_id')->constrained("entreprises")->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreignId('to_id')->constrained("clients")->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignId('delivery_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->integer('counter');
             $table->timestamps();
         });

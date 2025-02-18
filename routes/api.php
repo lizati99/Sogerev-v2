@@ -3,8 +3,11 @@
 use App\Http\Controllers\Api\CashRegisterController;
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\ClientController;
+use App\Http\Controllers\Api\DeliveryController;
 use App\Http\Controllers\Api\DeviController;
 use App\Http\Controllers\Api\EntrepriseController;
+use App\Http\Controllers\Api\InvoiceController;
+use App\Http\Controllers\Api\OrderDraftController;
 use App\Http\Controllers\Api\PaymentTypeController;
 use App\Http\Controllers\Api\PermissionController;
 use App\Http\Controllers\Api\ProductController;
@@ -44,7 +47,7 @@ Route::apiResource('products', ProductController::class);
 Route::apiResource('suppliers', SupplierController::class);
 
 // entreprise
-Route::apiResource('enterprises', EntrepriseController::class);
+Route::apiResource('entreprises', EntrepriseController::class);
 
 // stock API
 Route::apiResource('stocks', StockController::class);
@@ -57,6 +60,9 @@ Route::apiResource('cash-registers', CashRegisterController::class);
 
 // reception API
 Route::apiResource('receptions', ReceptionController::class);
+
+// Clients API
+Route::apiResource('clients', ClientController::class);
 
 // sale order API
 Route::apiResource('sales', SaleOrderController::class);
@@ -72,7 +78,5 @@ Route::apiResource('deliveries', DeliveryController::class);
 
 // invoice API
 Route::apiResource('invoices', InvoiceController::class);
-// Clients API
-Route::apiResource('clients', ClientController::class);
 
 

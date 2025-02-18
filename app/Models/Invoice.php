@@ -11,13 +11,15 @@ class Invoice extends Model
     protected $fillable = [
         'number',
         'invoice_date',
-        'expiry date', // max 60 days
+        'expiry_date', // max 60 days
         'total_HT',
         'total_TVA',
         'total_TTC',
+        'TVA_rate',
         'payment_status',
         'from_id',
         'to_id',
+        'delivery_id'
         // 'counter'
     ];
 
