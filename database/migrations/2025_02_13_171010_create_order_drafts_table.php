@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('status');
             $table->foreignId('created_by')->constrained('users')->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreignId('updated_by')->constrained('users')->cascadeOnDelete()->cascadeOnUpdate();
-            $table->foreignId('sale_order_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignId('devi_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreignId('client_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
 
             $table->timestamps();

@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('devis', function (Blueprint $table) {
             $table->id();
-            $table->string('number');
+            $table->string('numero');
             $table->string('title');
             $table->double('total_HT');
             $table->double('total_TVA');

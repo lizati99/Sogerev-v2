@@ -10,7 +10,7 @@ class Devi extends Model
     use HasFactory;
 
     protected $fillable = [
-        'number',
+        'numero',
         'title',
         'total_HT',
         'total_TVA',

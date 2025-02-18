@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\CashRegisterController;
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\ClientController;
+use App\Http\Controllers\Api\DeviController;
 use App\Http\Controllers\Api\EntrepriseController;
 use App\Http\Controllers\Api\PaymentTypeController;
 use App\Http\Controllers\Api\PermissionController;
@@ -10,6 +11,7 @@ use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\PurchaseOrderController;
 use App\Http\Controllers\Api\ReceptionController;
 use App\Http\Controllers\Api\RoleController;
+use App\Http\Controllers\Api\SaleOrderController;
 use App\Http\Controllers\Api\StockController;
 use App\Http\Controllers\Api\SupplierController;
 use App\Http\Controllers\Api\UserController;
@@ -57,19 +59,19 @@ Route::apiResource('cash-registers', CashRegisterController::class);
 Route::apiResource('receptions', ReceptionController::class);
 
 // sale order API
-// Route::apiResource('sales', SaleOrderController::class);
+Route::apiResource('sales', SaleOrderController::class);
 
-// // devis API
-// Route::apiResource('devis', DeviController::class);
+// devis API
+Route::apiResource('devis', DeviController::class);
 
-// // order draft API
-// Route::apiResource('drafts', OrderDraftController::class);
+// order draft API
+Route::apiResource('drafts', OrderDraftController::class);
 
-// // delivery API
-// Route::apiResource('deliveries', DeliveryController::class);
+// delivery API
+Route::apiResource('deliveries', DeliveryController::class);
 
-// // invoice API
-// Route::apiResource('invoices', InvoiceController::class);
+// invoice API
+Route::apiResource('invoices', InvoiceController::class);
 // Clients API
 Route::apiResource('clients', ClientController::class);
 

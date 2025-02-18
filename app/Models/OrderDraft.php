@@ -20,7 +20,7 @@ class OrderDraft extends Model
         'status',
         'created_by',
         'updated_by',
-        'sale_order_id',
+        'devi_id',
         'client_id'
     ];
 
