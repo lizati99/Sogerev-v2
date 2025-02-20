@@ -80,10 +80,10 @@ Route::apiResource('entreprises', EntrepriseController::class);
 // stock API
 Route::apiResource('stocks', StockController::class);
 
-// purchase order API
+// purchase order API (commande Achat)
 Route::apiResource('purchases', PurchaseOrderController::class);
 
-// cash register API
+// cash register API (caisse)
 Route::apiResource('cash-registers', CashRegisterController::class);
 
 // reception API
@@ -92,19 +92,19 @@ Route::apiResource('receptions', ReceptionController::class);
 // Clients API
 Route::apiResource('clients', ClientController::class);
 
-// sale order API
+// sale order API (commande Vente)
 Route::apiResource('sales', SaleOrderController::class);
 
 // devis API
 Route::apiResource('devis', DeviController::class);
 
-// order draft API
+// order draft API (bon de commande)
 Route::apiResource('drafts', OrderDraftController::class);
 
-// delivery API
+// delivery API (bon de livraison)
 Route::apiResource('deliveries', DeliveryController::class);
 
-// invoice API
+// invoice API (facture)
 Route::apiResource('invoices', InvoiceController::class);
 
 

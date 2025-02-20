@@ -14,10 +14,6 @@ class CategorySeeder extends Seeder
     public function run(): void
     {
         Category::create([
-            'libelle' => 'Marbre Careaux',
-            'description' => 'Récouvert de carrelage, utilisé pour les sols et murs.',
-        ]);
-        Category::create([
             'libelle' => 'Marbre',
             'description' => 'Pierre naturelle utilisée pour les surfaces et les décorations.',
         ]);

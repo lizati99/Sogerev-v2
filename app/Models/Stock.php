@@ -10,8 +10,13 @@ class Stock extends Model
     use HasFactory;
 
     protected $fillable = [
-        'available_quantity',
-        'unit_price',
+        'current_stock',
+        // 'stock_min',
+        'stock_in',
+        'stock_out',
+        'stock_stolen',
+        'stock_damaged',
+        'stock_returned',
         'product_id',
     ];
 

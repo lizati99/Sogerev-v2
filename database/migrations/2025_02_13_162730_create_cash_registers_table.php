@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('cash_registers', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->double('solde');
-            $table->string('status');
-            $table->boolean('typeOperation');
+            $table->double('actual_balance')->nullable(); // solde actual
+            $table->string('status')->nullable();
+            $table->boolean('operation_type')->nullable();
+            $table->double('amount')->nullable(); // montant (depôt, retrait)
             $table->timestamps();
         });
     }

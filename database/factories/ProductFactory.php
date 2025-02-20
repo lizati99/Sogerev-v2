@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\SubCategory;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -20,10 +22,16 @@ class ProductFactory extends Factory
             'name' => $this->faker->word,
             'ref' => $this->faker->unique()->numerify('P-####'),
             'description' => $this->faker->sentence(10),
+            'pricePurchase' => $this->faker->randomFloat(2, 1, 100),
             'unit_price' => $this->faker->randomFloat(2, 1, 100),
-            'quantity' => $this->faker->randomNumber(2),
+            'unit_price_min' => $this->faker->randomFloat(2, 1, 100),
+            'unit_price_max' => $this->faker->randomFloat(2, 1, 100),
+            // 'quantity' => $this->faker->randomNumber(2),
             'is_available' => $this->faker->boolean,
             // 'stock_id' => \App\Models\Stock::factory(),
+            'createdBy' => User::inRandomOrder()->first()?->id,
+            'updatedBy' => User::inRandomOrder()->first()?->id,
+            'subCategory_id' => SubCategory::inRandomOrder()->first()?->id,
         ];
     }
 }

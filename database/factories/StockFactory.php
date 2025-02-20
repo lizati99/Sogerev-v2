@@ -18,8 +18,12 @@ class StockFactory extends Factory
     public function definition(): array
     {
         return [
-            'available_quantity' => $this->faker->randomNumber(2),
-            'unit_price' => $this->faker->randomFloat(2, 0, 1000),
+            'current_stock' => $this->faker->numberBetween(0, 1000),
+            'stock_in' => $this->faker->numberBetween(0, 500),
+            'stock_out' => $this->faker->numberBetween(0, 300),
+            'stock_stolen' => $this->faker->numberBetween(0, 100),
+            'stock_damaged' => $this->faker->numberBetween(0, 100),
+            'stock_returned' => $this->faker->numberBetween(0, 200),
             'product_id' => Product::inRandomOrder()->first()?->id,
         ];
     }

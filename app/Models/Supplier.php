@@ -12,15 +12,16 @@ class Supplier extends Model
     protected $fillable = [
         'name',
         'description',
+        'email',
+        'rs',
         'address',
         'city',
         'region',
         'postal_code',
-        'country',
-        'email',
+        // 'country',
         'phone_number',
-        'contact',
-        'website',
+        'rib',
+        'isCompany',
     ];
 
     // public function receptions(){

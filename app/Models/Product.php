@@ -12,14 +12,24 @@ class Product extends Model
         'name',
         'ref',
         'description',
+        'pricePurchase',
         'unit_price',
-        'quantity',
+        'unit_price_min',
+        'unit_price_max',
+        // 'quantity',
         'is_available',
+        'createdBy',
+        'updatedBy',
+        'subCategory_id'
         // 'stock_id'
     ];
 
     public function category(){
         return $this->belongsTo(Category::class);
+    }
+
+    public function subCategory(){
+        return $this->belongsTo(SubCategory::class);
     }
 
     // public function salesOrdersLines(){

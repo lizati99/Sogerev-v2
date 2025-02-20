@@ -10,10 +10,21 @@ class Reception extends Model
     use HasFactory;
 
     protected $fillable = [
+        'reception_number',
+        'payment_type',
         'reception_date',
+        'realization_date',
+        'experation_date',
+        'total_HT',
+        'total_TVA',
+        'total_TTC',
+        'TVA_rate',
+        'createdBy',
+        'updatedBy',
         'supplier_id',
-        'purchase_order_id',
-        'cash_register_id'
+        'entreprise_id',
+        'cash_register_id',
+        'purchase_order_id'
     ];
 
     public function supplier(){

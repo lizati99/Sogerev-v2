@@ -16,12 +16,12 @@ class CategoryController extends Controller
             if ($categories->isEmpty()) {
                 return response()->json([
                     'message' => 'Aucune catégorie trouvée.',
-                    'categries' => []
+                    'categories' => []
                 ], 200);
             }
             return response()->json([
                 'message' => 'Liste de toutes les catégories avec succès',
-                'categries' => $categories
+                'categories' => $categories
             ], 200);
         } catch (Exception $exception) {
             return response()->json([

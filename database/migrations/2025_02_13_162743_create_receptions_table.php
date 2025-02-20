@@ -13,10 +13,21 @@ return new class extends Migration
     {
         Schema::create('receptions', function (Blueprint $table) {
             $table->id();
+            $table->string('reception_number');
+            $table->string('payment_type');
             $table->date('reception_date');
-            $table->foreignId('supplier_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
+            $table->date('realization_date');
+            $table->date('experation_date');
+            $table->double('total_HT');
+            $table->double('total_TVA');
+            $table->double('total_TTC');
+            $table->double('TVA_rate');
+            $table->foreignId('createdBy')->constrained('users')->onDelete('set null');
+            $table->foreignId('updatedBy')->constrained('users')->onDelete('set null');
+            $table->foreignId('supplier_id')->constrained()->onDelete('set null');
+            $table->foreignId('entreprise_id')->constrained()->onDelete('set null');
+            $table->foreignId('cash_register_id')->constrained()->onDelete('set null');
             $table->foreignId('purchase_order_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
-            $table->foreignId('cash_register_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->timestamps();
         });
     }

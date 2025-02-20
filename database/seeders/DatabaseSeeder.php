@@ -30,8 +30,8 @@ class DatabaseSeeder extends Seeder
             ClientSeeder::class,
             SupplierSeeder::class,
             CategorySeeder::class,
-            ProductSeeder::class,
             SubCategorySeeder::class,
+            ProductSeeder::class,
             StockSeeder::class,
             EntrepriseSeeder::class,
         ]);

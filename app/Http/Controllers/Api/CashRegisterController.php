@@ -94,4 +94,22 @@ class CashRegisterController extends Controller
         $cashRegister->delete();
         return response()->json(null, 204);
     }
+
+    public function updateCaisseBalance(Request $request)
+    {
+        $request->validate([
+            'actual_balance'=>'numeric',
+            'operation_type'=>'boolean|integer',
+        ], [
+            'actual_balance.numeric' => 'Le montant doit être un nombre.',
+            'operation_type.boolean' => 'Le type d\'opération doit être un booléen.',
+            'operation_type.integer' => 'Le type d\'opération doit être un entier.',
+        ]);
+
+        $caisse = new CashRegister();
+
+        $caisse->updateSolde($request->actual_balance, $request->operation_type);
+
+        return redirect()->back();
+    }
 }
