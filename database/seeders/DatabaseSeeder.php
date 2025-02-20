@@ -35,5 +35,6 @@ class DatabaseSeeder extends Seeder
             StockSeeder::class,
             EntrepriseSeeder::class,
         ]);
+
     }
 }

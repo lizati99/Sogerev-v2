@@ -76,18 +76,18 @@ class OrderDraftController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(OrderDraft $orderDraft)
+    public function show(string $id)
     {
-        $draft = OrderDraft::findOrFail($orderDraft);
+        $draft = OrderDraft::findOrFail($id);
         return response()->json($draft, 200);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, OrderDraft $orderDraft)
+    public function update(Request $request, string $id)
     {
-        $draft = OrderDraft::findOrFail($orderDraft);
+        $draft = OrderDraft::findOrFail($id);
         $request->validate([
             'numero' => 'string',
             'title'=>'string',
@@ -123,9 +123,9 @@ class OrderDraftController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(OrderDraft $orderDraft)
+    public function destroy(string $id)
     {
-        $draft = OrderDraft::findOrFail($orderDraft);
+        $draft = OrderDraft::findOrFail($id);
         $draft->delete();
         return response()->json(null, 204);
     }

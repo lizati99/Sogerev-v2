@@ -49,18 +49,18 @@ class PermissionController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Permission $permission)
+    public function show(string $id)
     {
-        $permission = Permission::findOrFail($permission);
+        $permission = Permission::findOrFail($id);
         return response()->json($permission, 200);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Permission $permission)
+    public function update(Request $request, string $id)
     {
-        $permission = Permission::findOrFail($permission);
+        $permission = Permission::findOrFail($id);
         $request->validate([
             'libelle' =>'string|max:255',
             'description' =>'string|max:255',
@@ -72,9 +72,9 @@ class PermissionController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Permission $permission)
+    public function destroy(string $id)
     {
-        $permission = Permission::findOrFail($permission);
+        $permission = Permission::findOrFail($id);
         $permission->delete();
         return response()->json(null, 204);
     }

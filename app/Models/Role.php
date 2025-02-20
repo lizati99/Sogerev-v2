@@ -14,10 +14,11 @@ class Role extends Model
         'description'
     ];
 
-    // public function permissions(){
-    //     return $this->hasMany(Permission::class);
-    // }
-    // public function user(){
-    //     return $this->belongsTo(User::class);
-    // }
+    public function users() {
+        return $this->hasMany(User::class);
+    }
+
+    public function permissions() {
+        return $this->belongsToMany(Permission::class, 'role_permissions');
+    }
 }

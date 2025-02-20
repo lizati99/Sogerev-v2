@@ -39,15 +39,15 @@ class ClientController extends Controller
         return response()->json($client, 201);
     }
 
-    public function show(Client $client)
+    public function show(string $id)
     {
-        $client = Client::findOrFail($client);
+        $client = Client::findOrFail($id);
         return $client;
     }
 
-    public function update(Request $request, Client $client)
+    public function update(Request $request, string $id)
     {
-        $client = Client::findOrFail($client);
+        $client = Client::findOrFail($id);
         $request->validate([
             'name' =>'string|max:255',
         ]);
@@ -55,9 +55,9 @@ class ClientController extends Controller
         return response()->json($client, 200);
     }
 
-    public function destroy(Client $client)
+    public function destroy(string $id)
     {
-        $client = Client::findOrFail($client);
+        $client = Client::findOrFail($id);
         $client->delete();
         return response()->json(null, 204);
     }

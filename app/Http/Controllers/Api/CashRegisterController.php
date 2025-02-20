@@ -57,18 +57,18 @@ class CashRegisterController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(CashRegister $cashRegister)
+    public function show(string $id)
     {
-        $cashRegister = CashRegister::findOrFail($cashRegister);
+        $cashRegister = CashRegister::findOrFail($id);
         return response()->json($cashRegister, 200);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, CashRegister $cashRegister)
+    public function update(Request $request, string $id)
     {
-        $cashRegister = CashRegister::findOrFail($cashRegister);
+        $cashRegister = CashRegister::findOrFail($id);
         $request->validate([
             'name'=>'string|max:255',
             'solde' =>'numeric',
@@ -88,9 +88,9 @@ class CashRegisterController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(CashRegister $cashRegister)
+    public function destroy(string $id)
     {
-        $cashRegister = CashRegister::findOrFail($cashRegister);
+        $cashRegister = CashRegister::findOrFail($id);
         $cashRegister->delete();
         return response()->json(null, 204);
     }

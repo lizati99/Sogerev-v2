@@ -71,18 +71,18 @@ class DeviController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Devi $devi)
+    public function show(string $id)
     {
-        $devi = Devi::findOrFail($devi);
+        $devi = Devi::findOrFail($id);
         return response()->json($devi, 200);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Devi $devi)
+    public function update(Request $request, string $id)
     {
-        $devi = Devi::findOrFail($devi);
+        $devi = Devi::findOrFail($id);
         $request->validate([
             'numero' => 'string',
             'title'=>'string',
@@ -113,9 +113,9 @@ class DeviController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Devi $devi)
+    public function destroy(string $id)
     {
-        $devi = Devi::findOrFail($devi);
+        $devi = Devi::findOrFail($id);
         $devi->delete();
         return response()->json(null, 204);
     }

@@ -49,14 +49,15 @@ class SupplierController extends Controller
         return response()->json($supplier, 201);
     }
 
-    public function show(Supplier $supplier)
+    public function show(string $id)
     {
-        $supplier = Supplier::findOrFail($supplier);
+        $supplier = Supplier::findOrFail($id);
         return $supplier;
     }
 
-    public function update(Request $request, Supplier $supplier)
+    public function update(Request $request, string $id)
     {
+        $supplier = Supplier::findOrFail($id);
         $request->validate([
             'name' => ['string','max:255'],
             'description' => ['string','max:255'],
@@ -74,9 +75,9 @@ class SupplierController extends Controller
         return response()->json($supplier, 200);
     }
 
-    public function destroy(Supplier $supplier)
+    public function destroy(string $id)
     {
-        $supplier = Supplier::findOrFail($supplier);
+        $supplier = Supplier::findOrFail($id);
         $supplier->delete();
         return response()->json(null, 204);
     }

@@ -39,15 +39,15 @@ class PaymentTypeController extends Controller
         return response()->json($paymentType, 201);
     }
 
-    public function show(paymentType $paymentType)
+    public function show(string $id)
     {
-        $paymentType = PaymentType::findOrFail($paymentType);
+        $paymentType = PaymentType::findOrFail($id);
         return $paymentType;
     }
 
-    public function update(Request $request, PaymentType $paymentType)
+    public function update(Request $request, string $id)
     {
-        $paymentType = PaymentType::findOrFail($paymentType);
+        $paymentType = PaymentType::findOrFail($id);
         $request->validate([
             'name' =>'string|max:255',
         ]);
@@ -55,9 +55,9 @@ class PaymentTypeController extends Controller
         return response()->json($paymentType, 200);
     }
 
-    public function destroy(PaymentType $paymentType)
+    public function destroy(string $id)
     {
-        $paymentType = PaymentType::findOrFail($paymentType);
+        $paymentType = PaymentType::findOrFail($id);
         $paymentType->delete();
         return response()->json(null, 204);
     }

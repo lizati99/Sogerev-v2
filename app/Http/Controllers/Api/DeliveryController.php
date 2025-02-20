@@ -69,18 +69,18 @@ class DeliveryController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Delivery $delivery)
+    public function show(string $id)
     {
-        $delivery = Delivery::findOrFail($delivery);
+        $delivery = Delivery::findOrFail($id);
         return response()->json($delivery, 200);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Delivery $delivery)
+    public function update(Request $request, string $id)
     {
-        $delivery = Delivery::findOrFail($delivery);
+        $delivery = Delivery::findOrFail($id);
         $request->validate([
             'delivery_date'=>'date',
             'address' => 'string',
@@ -110,9 +110,9 @@ class DeliveryController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Delivery $delivery)
+    public function destroy(string $id)
     {
-        $delivery = Delivery::findOrFail($delivery);
+        $delivery = Delivery::findOrFail($id);
         $delivery->delete();
         return response()->json(null, 204);
     }

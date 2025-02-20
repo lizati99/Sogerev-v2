@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\CashRegisterController;
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\ClientController;
@@ -21,6 +22,31 @@ use App\Http\Controllers\Api\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
+Route::post('/register', [AuthController::class, 'register']);
+Route::post('/login', [AuthController::class, 'login']);
+// Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
+
+
+Route::middleware(['auth:sanctum'])->group(function () {
+    Route::post('/logout', [AuthController::class, 'logout']);
+
+    Route::middleware('permission:manage_users')->group(function () {
+        // Route::get('/users', 'UserController@index');
+        Route::apiResource('users', UserController::class);
+    });
+
+    Route::middleware('permission:view_reports')->group(function () {
+        Route::get('/reports', 'ReportController@index');
+    });
+});
+// Route::middleware('auth:sanctum')->group(function () {
+//     Route::post('/logout', [AuthController::class, 'logout']);
+//     Route::get('/users', [UserController::class, 'index']);
+//     Route::get('/users/{user}', [UserController::class, 'show']);
+//     Route::get('/roles', [RoleController::class, 'index']);
+//     Route::get('/permissions', [PermissionController::class, 'index']);
+// });
+
 Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
@@ -29,7 +55,9 @@ Route::get('/user', function (Request $request) {
 Route::apiResource('roles', RoleController::class);
 
 // users API
-Route::apiResource('users', UserController::class);
+// Route::middleware('auth:sanctum')->group(function () {
+//     Route::apiResource('users', UserController::class);
+// });
 
 //payment type
 Route::apiResource('payment-types', PaymentTypeController::class);

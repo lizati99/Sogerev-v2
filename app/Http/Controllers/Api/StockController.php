@@ -55,18 +55,18 @@ class StockController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Stock $stock)
+    public function show(string $id)
     {
-        $stock = Stock::findOrFail($stock);
+        $stock = Stock::findOrFail($id);
         return response()->json($stock, 200);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Stock $stock)
+    public function update(Request $request,string $id)
     {
-        $stock = Stock::findOrFail($stock);
+        $stock = Stock::findOrFail($id);
         $request->validate([
             'available_quantity' => 'integer',
             'unit_price' => 'numeric',
@@ -84,9 +84,9 @@ class StockController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Stock $stock)
+    public function destroy(string $id)
     {
-        $stock = Stock::findOrFail($stock);
+        $stock = Stock::findOrFail($id);
         $stock->delete();
         return response()->json(null, 204);
     }

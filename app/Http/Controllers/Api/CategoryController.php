@@ -39,15 +39,15 @@ class CategoryController extends Controller
         return response()->json($category, 201);
     }
 
-    public function show(Category $category)
+    public function show(string $id)
     {
-        $category = Category::findOrFail($category);
+        $category = Category::findOrFail($id);
         return $category;
     }
 
-    public function update(Request $request, Category $category)
+    public function update(Request $request, string $id)
     {
-        $category = Category::findOrFail($category);
+        $category = Category::findOrFail($id);
         $request->validate([
             'libelle' =>'string|max:255',
         ]);
@@ -55,8 +55,9 @@ class CategoryController extends Controller
         return response()->json($category, 200);
     }
 
-    public function destroy(Category $category)
+    public function destroy(string $id)
     {
+        $category = Category::findOrFail($id);
         $category->delete();
         return response()->json(null, 204);
     }

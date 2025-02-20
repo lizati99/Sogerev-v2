@@ -58,18 +58,18 @@ class PurchaseOrderController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(PurchaseOrder $purchase)
+    public function show(string $id)
     {
-        $purchase = PurchaseOrder::findOrFail($purchase);
+        $purchase = PurchaseOrder::findOrFail($id);
         return response()->json($purchase, 200);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, PurchaseOrder $purchase)
+    public function update(Request $request, string $id)
     {
-        $purchase = PurchaseOrder::findOrFail($purchase);
+        $purchase = PurchaseOrder::findOrFail($id);
         $request->validate([
             'purchase_date'=>'date',
             'total_amount' =>'numeric',
@@ -90,9 +90,9 @@ class PurchaseOrderController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(PurchaseOrder $purchase)
+    public function destroy(string $id)
     {
-        $purchase = PurchaseOrder::findOrFail($purchase);
+        $purchase = PurchaseOrder::findOrFail($id);
         $purchase->delete();
         return response()->json(null, 204);
     }

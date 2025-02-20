@@ -60,18 +60,18 @@ class ReceptionController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Reception $reception)
+    public function show(string $id)
     {
-        $reception = Reception::findOrFail($reception);
+        $reception = Reception::findOrFail($id);
         return response()->json($reception, 200);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Reception $reception)
+    public function update(Request $request, string $id)
     {
-        $reception = Reception::findOrFail($reception);
+        $reception = Reception::findOrFail($id);
         $request->validate([
             'reception_date'=>'date',
             'supplier_id'=>'required|exists:suppliers,id',
@@ -94,9 +94,9 @@ class ReceptionController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Reception $reception)
+    public function destroy(string $id)
     {
-        $reception = Reception::findOrFail($reception);
+        $reception = Reception::findOrFail($id);
         $reception->delete();
         return response()->json(null, 204);
     }

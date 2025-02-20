@@ -13,6 +13,22 @@ class PermissionSeeder extends Seeder
      */
     public function run(): void
     {
-        Permission::factory(10)->create();
+        Permission::create([
+            'libelle' => 'gérer les utilisateurs',
+            'description' => 'Gestion des utilisateurs (créer, modifier, supprimer).',
+        ]);
+        Permission::create([
+            'libelle' => 'consulter les rapports',
+            'description' => 'Voir les rapports.',
+        ]);
+        Permission::create([
+            'libelle' => 'gérer les ventes',
+            'description' => 'Gestion des ventes.',
+        ]);
+        Permission::create([
+            'libelle' => 'tableau de bord d\'accès',
+            'description' => 'Accès au panneau de contrôle.',
+        ]);
+        // Permission::factory(10)->create();
     }
 }

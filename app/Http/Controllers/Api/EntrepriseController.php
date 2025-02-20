@@ -87,18 +87,18 @@ class EntrepriseController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Entreprise $entreprise)
+    public function show(string $id)
     {
-        $entreprise = Entreprise::findOrFail($entreprise);
+        $entreprise = Entreprise::findOrFail($id);
         return response()->json($entreprise, 200);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Entreprise $entreprise)
+    public function update(Request $request, string $id)
     {
-        $entreprise = Entreprise::findOrFail($entreprise);
+        $entreprise = Entreprise::findOrFail($id);
         $request->validate([
             'name' =>'string|max:255',
             'RS'=>'string|max:255',
@@ -146,9 +146,9 @@ class EntrepriseController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Entreprise $entreprise)
+    public function destroy(string $id)
     {
-        $entreprise = Entreprise::findOrFail($entreprise);
+        $entreprise = Entreprise::findOrFail($id);
         $entreprise->delete();
         return response()->json(null, 204);
     }

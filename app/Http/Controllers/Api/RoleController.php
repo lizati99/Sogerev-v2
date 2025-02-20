@@ -12,7 +12,7 @@ class RoleController extends Controller
     public function index()
     {
         try {
-            $roles = Role::all();
+            $roles = Role::with('permissions')->get();
             if ($roles->isEmpty()) {
                 return response()->json([
                     'message' => 'Aucun role trouvé',
@@ -32,29 +32,28 @@ class RoleController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
-            'name' =>'string|max:255',
-        ]);
+        $request->validate(['libelle' => 'required|unique:roles']);
         $role = Role::create($request->all());
         return response()->json($role, 201);
     }
 
-    public function show(Role $role)
+    public function show(string $id)
     {
-        $role = Role::findOrFail($role);
+        $role = Role::with('permissions')->findOrFail($id);
         return $role;
     }
 
-    public function update(Request $request, Role $role)
+    public function update(Request $request, string $id)
     {
-        $role = Role::findOrFail($role);
+        $role = Role::findOrFail($id);
+        $request->validate(['libelle' => 'required|unique:roles']);
         $role->update($request->all());
         return response()->json($role, 200);
     }
 
-    public function destroy(Role $role)
+    public function destroy(string $id)
     {
-        $role = Role::findOrFail($role);
+        $role = Role::findOrFail($id);
         $role->delete();
         return response()->json(null, 204);
     }

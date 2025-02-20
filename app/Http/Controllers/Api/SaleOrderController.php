@@ -58,18 +58,18 @@ class SaleOrderController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(SaleOrder $sale)
+    public function show(string $id)
     {
-        $sale = SaleOrder::findOrFail($sale);
+        $sale = SaleOrder::findOrFail($id);
         return response()->json($sale, 200);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, SaleOrder $sale)
+    public function update(Request $request, string $id)
     {
-        $sale = SaleOrder::findOrFail($sale);
+        $sale = SaleOrder::findOrFail($id);
         $request->validate([
             'sale_date'=>'date',
             'total_amount' =>'numeric',
@@ -90,9 +90,9 @@ class SaleOrderController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(SaleOrder $sale)
+    public function destroy(string $id)
     {
-        $sale = SaleOrder::findOrFail($sale);
+        $sale = SaleOrder::findOrFail($id);
         $sale->delete();
         return response()->json(null, 204);
     }

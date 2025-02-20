@@ -88,10 +88,10 @@ class InvoiceController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Invoice $invoice)
+    public function update(Request $request, string $id)
     {
         try {
-            $invoice = Invoice::findOrFail($invoice);
+            $invoice = Invoice::findOrFail($id);
             $request->validate([
                 'number' => 'string',
                 'invoice_date'=>'date',
@@ -132,10 +132,10 @@ class InvoiceController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Invoice $invoice)
+    public function destroy(string $id)
     {
         try {
-            $invoice = Invoice::findOrFail($invoice);
+            $invoice = Invoice::findOrFail($id);
             $invoice->delete();
             return response()->json(['message' => 'Facture supprimée avec succès'], 200);
         } catch (Exception $exception) {
