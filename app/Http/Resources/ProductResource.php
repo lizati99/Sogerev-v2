@@ -17,10 +17,12 @@ class ProductResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'reference' => $this->ref,
+            'ref' => $this->ref,
             'description' => $this->description,
+            'pricePurchase' => $this->pricePurchase,
             'unit_price' => $this->unit_price,
-            'quantity' => $this->quantity,
+            'unit_price_min' => $this->unit_price_min,
+            'unit_price_max' => $this->unit_price_max,
             'is_available' => $this->is_available,
         ];
         // return parent::toArray($request);

@@ -11,12 +11,17 @@ class Client extends Model
 
     protected $fillable = [
         'name',
+        'description',
         'email',
-        'phone_number',
+        'rs',
         'address',
         'city',
-        'code_postal',
-        'siteweb'
+        'region',
+        'postal_code',
+        // 'country',
+        'phone_number',
+        'rib',
+        'isCompany',
     ];
 
     // public function devis()

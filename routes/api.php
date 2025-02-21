@@ -32,13 +32,12 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
 
     Route::middleware('permission:manage_users')->group(function () {
-        // Route::get('/users', 'UserController@index');
         Route::apiResource('users', UserController::class);
     });
 
-    Route::middleware('permission:view_reports')->group(function () {
-        Route::get('/reports', 'ReportController@index');
-    });
+    // Route::middleware('permission:view_reports')->group(function () {
+    //     Route::get('/reports', 'ReportController@index');
+    // });
 });
 // Route::middleware('auth:sanctum')->group(function () {
 //     Route::post('/logout', [AuthController::class, 'logout']);

@@ -55,7 +55,7 @@ class User extends Authenticatable
     }
 
     public function role() {
-        return $this->belongsTo(Role::class, 'role_id');
+        return $this->belongsTo(Role::class);
     }
 
     public function permissions() {
@@ -75,7 +75,7 @@ class User extends Authenticatable
         $permissionName = $mapPermissions[$permission] ?? $permission;
 
         // Super Admin has all permissions
-        if ($this->role->libelle === 'super admin') {
+        if ($this->role && $this->role->libelle === 'super admin') {
             return true;
         }
 

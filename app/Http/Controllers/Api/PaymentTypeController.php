@@ -33,7 +33,13 @@ class PaymentTypeController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' =>'string|max:255',
+            'libelle' =>'nullable|string|max:255',
+            'description' =>'nullable|string|max:255'
+        ],[
+            'libelle.string' => 'Le libelle doit être une chaîne de caractères',
+            'libelle.max' => 'Le libelle ne doit pas dépasser 255 caractères',
+            'description.string' => 'La description doit être une chaîne de caractères',
+            'description.max' => 'La description ne doit pas dépasser 255 caractères'
         ]);
         $paymentType = PaymentType::create($request->all());
         return response()->json($paymentType, 201);
@@ -49,7 +55,13 @@ class PaymentTypeController extends Controller
     {
         $paymentType = PaymentType::findOrFail($id);
         $request->validate([
-            'name' =>'string|max:255',
+            'libelle' =>'nullable|string|max:255',
+            'description' =>'nullable|string|max:255'
+        ],[
+            'libelle.string' => 'Le libelle doit être une chaîne de caractères',
+            'libelle.max' => 'Le libelle ne doit pas dépasser 255 caractères',
+            'description.string' => 'La description doit être une chaîne de caractères',
+            'description.max' => 'La description ne doit pas dépasser 255 caractères'
         ]);
         $paymentType->update($request->all());
         return response()->json($paymentType, 200);

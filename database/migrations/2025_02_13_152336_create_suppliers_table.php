@@ -13,18 +13,18 @@ return new class extends Migration
     {
         Schema::create('suppliers', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name')->nullable();
             $table->text('description')->nullable();
-            $table->string('email');
-            $table->string('rs');
-            $table->string('address');
-            $table->string('city');
-            $table->string('region');
-            $table->string('postal_code');
+            $table->string('email')->nullable();
+            $table->string('rs')->nullable();
+            $table->string('address')->nullable();
+            $table->string('city')->nullable();
+            $table->string('region')->nullable();
+            $table->string('postal_code')->nullable();
             // $table->string('country');
-            $table->string('phone_number');
-            $table->string('rib');
-            $table->boolean('isCompany');
+            $table->string('phone_number')->nullable();
+            $table->string('rib')->nullable();
+            $table->boolean('isCompany')->nullable();
             $table->timestamps();
         });
     }

@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('permissions', function (Blueprint $table) {
             $table->id();
-            $table->string('libelle');
+            $table->string('libelle')->nullable();
             $table->text('description')->nullable();
             $table->timestamps();
         });

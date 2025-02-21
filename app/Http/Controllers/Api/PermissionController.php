@@ -39,8 +39,12 @@ class PermissionController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'libelle' =>'string|max:255',
-            'description' =>'string|max:255',
+            'libelle' =>'nullable|string|max:255',
+            'description' =>'nullable|string',
+        ], [
+            'libelle.string' => 'Le libelle doit être une chaîne de caractères.',
+            'libelle.max' => 'Le libelle ne doit pas dépasser 255 caractères.',
+            'description.string' => 'La description doit être une chaîne de caractères.'
         ]);
         $permission = Permission::create($request->all());
         return response()->json($permission, 201);
@@ -62,8 +66,12 @@ class PermissionController extends Controller
     {
         $permission = Permission::findOrFail($id);
         $request->validate([
-            'libelle' =>'string|max:255',
-            'description' =>'string|max:255',
+            'libelle' =>'nullable|string|max:255',
+            'description' =>'nullable|string',
+        ], [
+            'libelle.string' => 'Le libelle doit être une chaîne de caractères.',
+            'libelle.max' => 'Le libelle ne doit pas dépasser 255 caractères.',
+            'description.string' => 'La description doit être une chaîne de caractères.'
         ]);
         $permission->update($request->all());
         return response()->json($permission, 200);

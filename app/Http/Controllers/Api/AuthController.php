@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -29,10 +30,19 @@ class AuthController extends Controller
             'password.confirmed' => 'Les mots de passe doivent correspondre',
         ]);
 
+        $guestRole = Role::where('libelle', 'guest')->first();
+
+        if (!$guestRole) {
+            return response()->json([
+                'message' => 'Le rôle "guest" n\'existe pas dans la base de données.',
+            ], 400);
+        }
+
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'role_id' => $guestRole->id
         ]);
 
         return response()->json([
