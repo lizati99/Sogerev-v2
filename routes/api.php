@@ -17,6 +17,7 @@ use App\Http\Controllers\Api\ReceptionController;
 use App\Http\Controllers\Api\RoleController;
 use App\Http\Controllers\Api\SaleOrderController;
 use App\Http\Controllers\Api\StockController;
+use App\Http\Controllers\Api\SubCategoryController;
 use App\Http\Controllers\Api\SupplierController;
 use App\Http\Controllers\Api\UserController;
 use Illuminate\Http\Request;
@@ -67,6 +68,9 @@ Route::apiResource('permissions', PermissionController::class);
 
 // Categories API
 Route::apiResource('categories', CategoryController::class);
+
+// SubCategory API
+Route::apiResource('subcategories', SubCategoryController::class);
 
 // Products API
 Route::apiResource('products', ProductController::class);

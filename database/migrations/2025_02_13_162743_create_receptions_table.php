@@ -22,12 +22,12 @@ return new class extends Migration
             $table->double('total_TVA');
             $table->double('total_TTC');
             $table->double('TVA_rate');
-            $table->foreignId('createdBy')->constrained('users')->onDelete('set null');
-            $table->foreignId('updatedBy')->constrained('users')->onDelete('set null');
-            $table->foreignId('supplier_id')->constrained()->onDelete('set null');
-            $table->foreignId('entreprise_id')->constrained()->onDelete('set null');
-            $table->foreignId('cash_register_id')->constrained()->onDelete('set null');
-            $table->foreignId('purchase_order_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignId('createdBy')->nullable()->constrained('users')->nullOnDelete();
+            $table->foreignId('updatedBy')->nullable()->constrained('users')->nullOnDelete();
+            $table->foreignId('supplier_id')->nullable()->constrained()->nullOnDelete();
+            $table->foreignId('entreprise_id')->nullable()->constrained()->nullOnDelete();
+            $table->foreignId('cash_register_id')->nullable()->constrained()->nullOnDelete();
+            $table->foreignId('purchase_order_id')->nullable()->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->timestamps();
         });
     }

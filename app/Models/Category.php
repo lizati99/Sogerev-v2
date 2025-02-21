@@ -12,9 +12,9 @@ class Category extends Model
     protected $fillable = ['libelle', 'description'];
 
     public function subCategories(){
-        return $this->hasMany(SubCategory::class, 'categorie_id');
+        return $this->hasMany(SubCategory::class);
     }
     public function products(){
-        return $this->hasMany(Product::class, 'categorie_id');
+        return $this->hasMany(Product::class);
     }
 }
