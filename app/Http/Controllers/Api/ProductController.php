@@ -34,17 +34,16 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'string|max:255',
-            'ref' => 'string|max:255',
-            'description' => 'string|max:255',
-            'pricePurchase' => 'numeric',
-            'unit_price' => 'numeric',
-            'unit_price_min' => 'numeric',
-            'unit_price_max' => 'numeric',
-            'is_available' => 'boolean',
-            'createdBy' => 'required|exists:users,id',
-            'updatedBy' => 'required|exists:users,id',
-            'subCategory_id' => 'required|exists:sub_categories,id'
+            'name' => 'nullable|string|max:255',
+            'ref' => 'nullable|string|max:255',
+            'description' => 'nullable|string|max:255',
+            'pricePurchase' => 'nullable|numeric',
+            'unit_price' => 'nullable|numeric',
+            'unit_price_min' => 'nullable|numeric',
+            'unit_price_max' => 'nullable|numeric',
+            'is_available' => 'nullable|boolean',
+            'createdBy' => 'nullable|exists:users,id',
+            'subCategory_id' => 'nullable|exists:sub_categories,id'
         ],[
             'name.string' => 'Le nom du produit doit être une chaîne de caractères.',
             'name.max' => 'Le nom du produit ne doit pas dépasser 255 caractères.',
@@ -57,11 +56,7 @@ class ProductController extends Controller
             'unit_price_min.numeric' => 'Le prix minimum unitaire du produit doit être numérique.',
             'unit_price_max.numeric' => 'Le prix maximum unitaire du produit doit être numérique.',
             'is_available.boolean' => 'La disponibilité du produit doit être une valeur booléenne.',
-            'createdBy.required' => 'L\'utilisateur créateur est obligatoire.',
-            'updatedBy.required' => 'L\'utilisateur modifié est obligatoire.',
             'createdBy.exists' => 'L\'utilisateur créateur :attribute n\'existe pas.',
-            'updatedBy.exists' => 'L\'utilisateur modifié :attribute n\'existe pas.',
-            'subCategory_id.required' => 'La sous-catégorie est obligatoire.',
             'subCategory_id.exists' => 'La sous-catégorie :attribute n\'existe pas.'
         ]);
         $product = Product::create($request->all());
@@ -78,16 +73,16 @@ class ProductController extends Controller
     {
         $product = Product::findOrFail($id);
         $request->validate([
-            'name' => 'string|max:255',
-            'ref' => 'string|max:255',
-            'description' => 'string|max:255',
-            'pricePurchase' => 'numeric',
-            'unit_price' => 'numeric',
-            'unit_price_min' => 'numeric',
-            'unit_price_max' => 'numeric',
-            'is_available' => 'boolean',
+            'name' => 'nullable|string|max:255',
+            'ref' => 'nullable|string|max:255',
+            'description' => 'nullable|string|max:255',
+            'pricePurchase' => 'nullable|numeric',
+            'unit_price' => 'nullable|numeric',
+            'unit_price_min' => 'nullable|numeric',
+            'unit_price_max' => 'nullable|numeric',
+            'is_available' => 'nullable|boolean',
             'updatedBy' => 'required|exists:users,id',
-            'subCategory_id' => 'required|exists:sub_categories,id'
+            'subCategory_id' => 'nullable|exists:sub_categories,id'
         ],[
             'name.string' => 'Le nom du produit doit être une chaîne de caractères.',
             'name.max' => 'Le nom du produit ne doit pas dépasser 255 caractères.',
@@ -102,7 +97,6 @@ class ProductController extends Controller
             'is_available.boolean' => 'La disponibilité du produit doit être une valeur booléenne.',
             'updatedBy.required' => 'L\'utilisateur modifié est obligatoire.',
             'updatedBy.exists' => 'L\'utilisateur modifié :attribute n\'existe pas.',
-            'subCategory_id.required' => 'La sous-catégorie est obligatoire.',
             'subCategory_id.exists' => 'La sous-catégorie :attribute n\'existe pas.'
         ]);
         $product->update($request->all());

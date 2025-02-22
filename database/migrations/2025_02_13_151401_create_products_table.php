@@ -24,7 +24,7 @@ return new class extends Migration
             $table->boolean('is_available')->default(true);
             $table->foreignId('createdBy')->nullable()->references('id')->on('users')->onDelete('set null');
             $table->foreignId('updatedBy')->nullable()->references('id')->on('users')->onDelete('set null');
-            $table->foreignId('subCategory_id')->constrained('sub_categories')->onDelete('cascade');
+            $table->foreignId('subCategory_id')->nullable()->constrained('sub_categories')->onDelete('cascade');
             // $table->foreignId('stock_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->timestamps();
         });

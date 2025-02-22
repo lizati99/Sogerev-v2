@@ -20,7 +20,7 @@ class Entreprise extends Model
         'city',
         'email',
         'siteweb',
-        'logo'
+        // 'logo'
     ];
 
     // public function devis(){

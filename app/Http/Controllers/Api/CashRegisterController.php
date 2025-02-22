@@ -39,16 +39,16 @@ class CashRegisterController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name'=>'string|max:255',
-            'solde' =>'numeric',
-            'status'=>'string|max:255',
-            'typeOperation'=>'boolean|integer',
+            'actual_balance'=>'numeric',
+            'status' =>'string|max:255',
+            'operation_type'=>'boolean',
+            'amount'=>'numeric',
         ], [
-            'name.string' => 'Le nom doit être une chaîne de caractères.',
-            'solde.numeric' => 'Le solde doit être un nombre.',
+            'actual_balance.numeric' => 'Le solde doit être un nombre.',
             'status.string' => 'Le statut doit être une chaîne de caractères.',
-            'typeOperation.boolean' => 'Le type d\'opération doit être un booléen.',
-            'typeOperation.integer' => 'Le type d\'opération doit être un entier.',
+            'status.max' => 'Le statut ne doit pas dépasser 255 caractères',
+            'operation_type.boolean' => 'Le type d\'opération doit être un booléen.',
+            'amount.numeric' => 'Le montant doit être un nombre.',
         ]);
         $cashRegister = CashRegister::create($request->all());
         return response()->json($cashRegister, 201);
@@ -70,16 +70,16 @@ class CashRegisterController extends Controller
     {
         $cashRegister = CashRegister::findOrFail($id);
         $request->validate([
-            'name'=>'string|max:255',
-            'solde' =>'numeric',
-            'status'=>'string|max:255',
-            'typeOperation'=>'boolean|integer',
+            'actual_balance'=>'numeric',
+            'status' =>'string|max:255',
+            'operation_type'=>'boolean',
+            'amount'=>'numeric',
         ], [
-            'name.string' => 'Le nom doit être une chaîne de caractères.',
-            'solde.numeric' => 'Le solde doit être un nombre.',
+            'actual_balance.numeric' => 'Le solde doit être un nombre.',
             'status.string' => 'Le statut doit être une chaîne de caractères.',
-            'typeOperation.boolean' => 'Le type d\'opération doit être un booléen.',
-            'typeOperation.integer' => 'Le type d\'opération doit être un entier.',
+            'status.max' => 'Le statut ne doit pas dépasser 255 caractères',
+            'operation_type.boolean' => 'Le type d\'opération doit être un booléen.',
+            'amount.numeric' => 'Le montant doit être un nombre.',
         ]);
         $cashRegister->update($request->all());
         return response()->json($cashRegister, 200);

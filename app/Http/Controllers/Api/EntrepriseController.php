@@ -40,18 +40,18 @@ class EntrepriseController extends Controller
     {
         try {
             $request->validate([
-                'name' =>'string|max:255',
-                'RS'=>'string|max:255',
-                'description' =>'string|max:255',
-                'phone_number_1'=>'string|max:255',
-                'phone_number_2'=>'string|max:255',
-                'fix'=>'string|max:255',
-                'fax'=>'string|max:255',
-                'address'=>'string|max:255',
-                'city'=>'string|max:255',
-                'email' =>'string|max:255|unique:entreprises',
-                'siteweb' =>'string|max:255',
-                'logo' =>'nullable|image|mimes:jpeg,png,jpg,webp|max:2048'
+                'name' =>'nullable|string|max:255',
+                'RS'=>'nullable|string|max:255',
+                'description' =>'nullable|string|max:255',
+                'phone_number_1'=>'nullable|string|max:255',
+                'phone_number_2'=>'nullable|string|max:255',
+                'fix'=>'nullable|string|max:255',
+                'fax'=>'nullable|string|max:255',
+                'address'=>'nullable|string|max:255',
+                'city'=>'nullable|string|max:255',
+                'email' =>'nullable|string|max:255|unique:entreprises',
+                'siteweb' =>'nullable|string|max:255',
+                // 'logo' =>'nullable|image|mimes:jpeg,png,jpg,webp|max:2048'
             ],[
                 'name.string' => 'Le nom doit être une chaîne de caractères',
                 'name.max' => 'Le nom ne doit pas dépasser 255 caractères',
@@ -75,12 +75,13 @@ class EntrepriseController extends Controller
                 'email.max' => 'L\'email ne doit pas dépasser 255 caractères',
                 'email.unique' => 'Cet email est déjà utilisé',
                 'siteweb.string' => 'Le site web doit être une chaîne de caractères',
-                'logo.image' => 'Le logo doit être une image (jpeg, png, jpg ou webp)',
-                'logo.mimes' => 'Le logo doit être au format jpeg, png, jpg ou webp',
-                'logo.max' => 'La taille de l\'image ne doit pas dépasser 2MB'
+                // 'logo.image' => 'Le logo doit être une image (jpeg, png, jpg ou webp)',
+                // 'logo.mimes' => 'Le logo doit être au format jpeg, png, jpg ou webp',
+                // 'logo.max' => 'La taille de l\'image ne doit pas dépasser 2MB'
             ]);
 
             // $logo = $request->hasFile('logo') ? $request->file('logo')->store('images/entreprise', 'public') : null;
+
             $entreprise = Entreprise::create($request->all());
             return response()->json($entreprise, 201);
         } catch (Exception $exception) {
@@ -115,18 +116,18 @@ class EntrepriseController extends Controller
         try {
             $entreprise = Entreprise::findOrFail($id);
             $request->validate([
-                'name' =>'string|max:255',
-                'RS'=>'string|max:255',
-                'description' =>'string|max:255',
-                'phone_number_1'=>'string|max:255',
-                'phone_number_2'=>'string|max:255',
-                'fix'=>'string|max:255',
-                'fax'=>'string|max:255',
-                'address'=>'string|max:255',
-                'city'=>'string|max:255',
-                'email' =>'string|max:255|unique:entreprises',
-                'siteweb' =>'string|max:255',
-                'logo' =>'nullable|image|mimes:jpeg,png,jpg,webp|max:2048'
+                'name' =>'nullable|string|max:255',
+                'RS'=>'nullable|string|max:255',
+                'description' =>'nullable|string|max:255',
+                'phone_number_1'=>'nullable|string|max:255',
+                'phone_number_2'=>'nullable|string|max:255',
+                'fix'=>'nullable|string|max:255',
+                'fax'=>'nullable|string|max:255',
+                'address'=>'nullable|string|max:255',
+                'city'=>'nullable|string|max:255',
+                'email' =>'nullable|string|max:255|unique:entreprises',
+                'siteweb' =>'nullable|string|max:255',
+                // 'logo' =>'nullable|image|mimes:jpeg,png,jpg,webp|max:2048'
             ],[
                 'name.string' => 'Le nom doit être une chaîne de caractères',
                 'name.max' => 'Le nom ne doit pas dépasser 255 caractères',
@@ -150,10 +151,13 @@ class EntrepriseController extends Controller
                 'email.max' => 'L\'email ne doit pas dépasser 255 caractères',
                 'email.unique' => 'Cet email est déjà utilisé',
                 'siteweb.string' => 'Le site web doit être une chaîne de caractères',
-                'logo.image' => 'Le logo doit être une image (jpeg, png, jpg ou webp)',
-                'logo.mimes' => 'Le logo doit être au format jpeg, png, jpg ou webp',
-                'logo.max' => 'La taille de l\'image ne doit pas dépasser 2MB'
+                // 'logo.image' => 'Le logo doit être une image (jpeg, png, jpg ou webp)',
+                // 'logo.mimes' => 'Le logo doit être au format jpeg, png, jpg ou webp',
+                // 'logo.max' => 'La taille de l\'image ne doit pas dépasser 2MB'
             ]);
+
+            // $logo = $request->hasFile('logo') ? $request->file('logo')->store('images/entreprise', 'public') : null;
+
             $entreprise->update($request->all());
             return response()->json($entreprise, 200);
         } catch (Exception $exception) {

@@ -28,7 +28,7 @@ class EntrepriseFactory extends Factory
             'city' => $this->faker->city,
             'email' => $this->faker->unique()->safeEmail,
             'siteweb' => $this->faker->url(),
-            'logo' => $this->faker->imageUrl(200, 200),
+            // 'logo' => $this->faker->imageUrl(200, 200),
         ];
     }
 }
