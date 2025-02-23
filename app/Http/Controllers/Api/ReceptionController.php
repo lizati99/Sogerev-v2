@@ -16,7 +16,7 @@ class ReceptionController extends Controller
     public function index()
     {
         try {
-            $receptions = Reception::all();
+            $receptions = Reception::with('receptionLines')->get();
             if ($receptions->isEmpty()) {
                 return response()->json([
                     'message' => 'Aucune réception trouvée.',
@@ -41,16 +41,16 @@ class ReceptionController extends Controller
     {
         try {
             $validatedData = $request->validate([
-                'reception_number' => 'nullable|string|max:255',
+                'reception_number' => 'nullable|string|max:255|unique:receptions,reception_number',
                 'sujet'=>'nullable|string',
                 'reception_date'=>'nullable|date',
                 'realization_date'=>'nullable|date',
                 'experation_date'=>'nullable|date',
-                'total_HT'=>'nullable|nemuric',
-                'total_TVA'=>'nullable|nemuric',
-                'total_TTC'=>'nullable|nemuric',
-                'TVA_rate'=>'nullable|nemuric',
-                'discount'=>'nullable|nemuric',
+                'total_HT'=>'nullable|numeric',
+                'total_TVA'=>'nullable|numeric',
+                'total_TTC'=>'nullable|numeric',
+                'TVA_rate'=>'nullable|numeric',
+                'discount'=>'nullable|numeric',
                 'status'=>'nullable|string:max:255',
                 'remarque'=>'nullable|string',
                 'createdBy'=>'nullable|exists:users,id',
@@ -129,7 +129,7 @@ class ReceptionController extends Controller
     public function show(string $id)
     {
         try {
-            $reception = Reception::findOrFail($id);
+            $reception = Reception::with('receptionLines')->findOrFail($id);
             return response()->json($reception, 200);
         } catch (Exception $exception) {
             return response()->json([
@@ -152,11 +152,11 @@ class ReceptionController extends Controller
                 'reception_date'=>'nullable|date',
                 'realization_date'=>'nullable|date',
                 'experation_date'=>'nullable|date',
-                'total_HT'=>'nullable|nemuric',
-                'total_TVA'=>'nullable|nemuric',
-                'total_TTC'=>'nullable|nemuric',
-                'TVA_rate'=>'nullable|nemuric',
-                'discount'=>'nullable|nemuric',
+                'total_HT'=>'nullable|numeric',
+                'total_TVA'=>'nullable|numeric',
+                'total_TTC'=>'nullable|numeric',
+                'TVA_rate'=>'nullable|numeric',
+                'discount'=>'nullable|numeric',
                 'status'=>'nullable|string:max:255',
                 'remarque'=>'nullable|string',
                 'updatedBy'=>'nullable|exists:users,id',
