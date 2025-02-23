@@ -11,7 +11,7 @@ class Reception extends Model
 
     protected $fillable = [
         'reception_number',
-        'payment_type',
+        'sujet',
         'reception_date',
         'realization_date',
         'experation_date',
@@ -19,24 +19,29 @@ class Reception extends Model
         'total_TVA',
         'total_TTC',
         'TVA_rate',
+        'discount',
+        'status',
+        'remarque',
         'createdBy',
         'updatedBy',
         'supplier_id',
+        'payment_type_id',
         'entreprise_id',
         'cash_register_id',
-        'purchase_order_id'
     ];
 
+    public function receptionLines () {
+        return $this->hasMany(ReceptionLine::class);
+    }
     public function supplier(){
         return $this->belongsTo(Supplier::class);
     }
 
-    public function purchaseOrder(){
-        return $this->belongsTo(PurchaseOrder::class);
+    public function paymentType(){
+        return $this->belongsTo(PaymentType::class);
     }
-
-    public function purchaseOrdersLines(){
-        return $this->hasMany(PurchaseOrderLine::class);
+    public function entreprise(){
+        return $this->belongsTo(Entreprise::class);
     }
 
     public function cashRegister(){

@@ -10,9 +10,20 @@ class ReceptionLine extends Model
     use HasFactory;
 
     protected $fillable = [
+        'designation',
+        'quantity',
+        'width',
+        'height',
+        'unitMeasure',
+        'productStatus',
+        'unitPriceHT',
+        'TVA_rate',
+        'totalTVA',
+        'totalHT',
+        'totalTTC',
         'reception_id',
         'product_id',
-        'received_quantity',
+        'stock_id'
     ];
 
     public function reception(){

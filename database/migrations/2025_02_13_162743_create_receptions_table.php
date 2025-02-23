@@ -13,21 +13,24 @@ return new class extends Migration
     {
         Schema::create('receptions', function (Blueprint $table) {
             $table->id();
-            $table->string('reception_number');
-            $table->string('payment_type');
-            $table->date('reception_date');
-            $table->date('realization_date');
-            $table->date('experation_date');
-            $table->double('total_HT');
-            $table->double('total_TVA');
-            $table->double('total_TTC');
-            $table->double('TVA_rate');
+            $table->string('reception_number')->nullable();
+            $table->text('sujet')->nullable();
+            $table->date('reception_date')->nullable();
+            $table->date('realization_date')->nullable();
+            $table->date('experation_date')->nullable();
+            $table->double('total_HT')->nullable();
+            $table->double('total_TVA')->nullable();
+            $table->double('total_TTC')->nullable();
+            $table->double('TVA_rate')->nullable();
+            $table->double('discount')->nullable();
+            $table->string('status')->nullable();
+            $table->text('remarque')->nullable();
             $table->foreignId('createdBy')->nullable()->constrained('users')->nullOnDelete();
             $table->foreignId('updatedBy')->nullable()->constrained('users')->nullOnDelete();
+            $table->foreignId('payment_type_id')->nullable()->constrained()->nullOnDelete();
             $table->foreignId('supplier_id')->nullable()->constrained()->nullOnDelete();
             $table->foreignId('entreprise_id')->nullable()->constrained()->nullOnDelete();
             $table->foreignId('cash_register_id')->nullable()->constrained()->nullOnDelete();
-            $table->foreignId('purchase_order_id')->nullable()->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->timestamps();
         });
     }

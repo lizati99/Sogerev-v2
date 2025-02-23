@@ -13,9 +13,20 @@ return new class extends Migration
     {
         Schema::create('reception_lines', function (Blueprint $table) {
             $table->id();
-            $table->integer('received_quantity');
-            $table->foreignId('reception_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
-            $table->foreignId('product_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
+            $table->string('designation')->nullable();
+            $table->integer('quantity')->nullable();
+            $table->double('width')->nullable();
+            $table->double('height')->nullable();
+            $table->string('unitMeasure')->nullable();
+            $table->string('productStatus')->nullable();
+            $table->double('unitPriceHT')->nullable();
+            $table->double('TVA_rate')->nullable();
+            $table->double('totalTVA')->nullable();
+            $table->double('totalHT')->nullable();
+            $table->double('totalTTC')->nullable();
+            $table->foreignId('reception_id')->nullable()->constrained()->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignId('product_id')->nullable()->constrained()->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignId('stock_id')->nullable()->constrained()->nullOnDelete();
             $table->timestamps();
         });
     }
