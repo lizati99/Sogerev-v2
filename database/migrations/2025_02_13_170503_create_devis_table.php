@@ -13,16 +13,22 @@ return new class extends Migration
     {
         Schema::create('devis', function (Blueprint $table) {
             $table->id();
-            $table->string('numero');
-            $table->string('title');
-            $table->double('total_HT');
-            $table->double('total_TVA');
-            $table->double('total_TTC');
-            $table->double('TVA_rate');
-            $table->date('devi_date');
-            $table->foreignId('created_by')->constrained('users')->cascadeOnDelete()->cascadeOnUpdate();
-            $table->foreignId('updated_by')->constrained('users')->cascadeOnDelete()->cascadeOnUpdate();
-            $table->foreignId('client_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
+            $table->string('devis_number')->nullable();
+            $table->string('title')->nullable();
+            $table->text('subject')->nullable();
+            $table->date('devis_date')->nullable();
+            $table->date('expiration_date')->nullable();
+            $table->decimal('total_HT')->nullable();
+            $table->decimal('total_TVA')->nullable();
+            $table->decimal('total_TTC')->nullable();
+            $table->integer('TVA_rate')->nullable();
+            $table->decimal('discount')->nullable();
+            $table->text('note')->nullable();
+            $table->string('status')->nullable();
+            $table->foreignId('created_by')->nullable()->constrained('users')->nullOnDelete();
+            $table->foreignId('updated_by')->nullable()->constrained('users')->nullOnDelete();
+            $table->foreignId('entreprise_id')->nullable()->constrained()->nullOnDelete();
+            $table->foreignId('client_id')->nullable()->constrained()->nullOnDelete();
             $table->timestamps();
         });
     }

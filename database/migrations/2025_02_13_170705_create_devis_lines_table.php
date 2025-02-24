@@ -13,11 +13,16 @@ return new class extends Migration
     {
         Schema::create('devis_lines', function (Blueprint $table) {
             $table->id();
-            $table->string('designation');
-            $table->integer('unit_price');
-            $table->double('quantity');
-            $table->integer('TVA_rate');
-            $table->double('price_HT');
+            $table->string('designation')->nullable();
+            $table->integer('quantity')->nullable();
+            $table->double('width')->nullable();
+            $table->double('height')->nullable();
+            $table->string('unitMeasure')->nullable();
+            $table->decimal('unitprice_HT')->nullable();
+            $table->integer('TVA_rate')->nullable();
+            $table->decimal('total_TVA')->nullable();
+            $table->decimal('total_HT')->nullable();
+            $table->decimal('total_TTC')->nullable();
             $table->foreignId('devi_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreignId('product_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->timestamps();

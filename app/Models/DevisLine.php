@@ -11,15 +11,20 @@ class DevisLine extends Model
     use HasFactory;
     protected $fillable = [
         'designation',
-        'unit_price',
         'quantity',
+        'width',
+        'height',
+        'unitMeasure',
+        'unitprice_HT',
         'TVA_rate',
-        'price_HT',
+        'total_TVA',
+        'total_HT',
+        'total_TTC',
         'devi_id',
         'product_id'
     ];
 
-    public function quote()
+    public function devi()
     {
         return $this->belongsTo(Devi::class);
     }

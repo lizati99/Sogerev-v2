@@ -58,7 +58,9 @@ class ReceptionController extends Controller
                 'payment_type_id'=>'nullable|exists:payment_types,id',
                 'entreprise_id'=>'nullable|exists:entreprises,id',
                 'cash_register_id'=>'nullable|exists:cash_registers,id',
-                'reception_lines' => 'required|array',
+
+                // ligne de reception
+                'reception_lines' => 'required|array|min:1',
                 'reception_lines.*.designation' => 'nullable|string|max:255',
                 'reception_lines.*.quantity' => 'nullable|numeric',
                 'reception_lines.*.width' => 'nullable|numeric',
@@ -92,7 +94,11 @@ class ReceptionController extends Controller
                 'payment_type_id.exists' => 'La type de paiement doit correspondre à une type existante',
                 'entreprise_id.exists' => 'L\'entreprise doit correspondre à une entreprise existante',
                 'cash_register_id.exists' => 'Le registre de caisse doit correspondre à un registre existant',
+
+                // Ligne de reception
                 'reception_lines.required' => 'Les lignes de réception sont obligatoires.',
+                'reception_lines.array' => 'Les lignes de reception doivent être sous forme de tableau.',
+                'reception_lines.min' => 'Il faut au moins une ligne de reception.',
                 'reception_lines.*.designation.string' => 'Le champ : Désignation doit être une chaîne de caractères.',
                 'reception_lines.*.designation.max' => 'Le champ : Désignation ne doit pas dépasser 255 caractères.',
                 'reception_lines.*.quantity.numeric' => 'Le champ : Quantité doit être un nombre.',
@@ -164,7 +170,9 @@ class ReceptionController extends Controller
                 'payment_type_id'=>'nullable|exists:payment_types,id',
                 'entreprise_id'=>'nullable|exists:entreprises,id',
                 'cash_register_id'=>'nullable|exists:cash_registers,id',
-                'reception_lines' => 'nullable|array',
+
+                // Ligne de reception
+                'reception_lines' => 'required|array|min:1',
                 'reception_lines.*.designation' => 'nullable|string|max:255',
                 'reception_lines.*.quantity' => 'nullable|numeric',
                 'reception_lines.*.width' => 'nullable|numeric',
@@ -198,6 +206,12 @@ class ReceptionController extends Controller
                 'payment_type_id.exists' => 'La type de paiement doit correspondre à une type existante',
                 'entreprise_id.exists' => 'L\'entreprise doit correspondre à une entreprise existante',
                 'cash_register_id.exists' => 'Le registre de caisse doit correspondre à un registre existant',
+
+                // ligne de reception
+                'reception_lines.required' => 'Au moins une ligne de reception est requise.',
+                'reception_lines.array' => 'Les lignes de reception doivent être sous forme de tableau.',
+                'reception_lines.min' => 'Il faut au moins une ligne de reception.',
+                'reception_lines.*.id.required' => 'L\'ID de la ligne de reception est obligatoire.',
                 'reception_lines.*.designation.string' => 'Le champ : Désignation doit être une chaîne de caractères.',
                 'reception_lines.*.designation.max' => 'Le champ : Désignation ne doit pas dépasser 255 caractères.',
                 'reception_lines.*.quantity.numeric' => 'Le champ : Quantité doit être un nombre.',
@@ -215,7 +229,30 @@ class ReceptionController extends Controller
                 'reception_lines.*.product_id.exists' => 'Le champ : Produit doit correspondre à un produit existant',
                 'reception_lines.*.stock_id.exists' => 'Le champ : Stock doit correspondre à un stock existant',
             ]);
+
             $reception->update($request->all());
+
+            $existingLigneIds = $reception->receptionLines()->pluck('id')->toArray();
+            $newLigneIds = [];
+
+            foreach ($validatedData['reception_lines'] as $ligne) {
+                if (isset($ligne['id']) && in_array($ligne['id'], $existingLigneIds)) {
+
+                    ReceptionLine::where('id', $ligne['id'])->update($ligne);
+                    $newLigneIds[] = $ligne['id'];
+                } else {
+                    // add new ligne if it not exists in database
+                    $ligne['reception_id'] = $reception->id;
+                    $newLigne = ReceptionLine::create($ligne);
+                    $newLigneIds[] = $newLigne->id;
+                }
+            }
+
+            // Delete lines no present
+            ReceptionLine::where('reception_id', $reception->id)
+                ->whereNotIn('id', $newLigneIds)
+                ->delete();
+
             return response()->json($reception, 200);
         } catch (Exception $exception) {
             return response()->json([

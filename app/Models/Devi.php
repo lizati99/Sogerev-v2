@@ -10,21 +10,31 @@ class Devi extends Model
     use HasFactory;
 
     protected $fillable = [
-        'numero',
+        'devis_number',
         'title',
+        'subject',
+        'devis_date',
+        'expiration_date',
         'total_HT',
         'total_TVA',
         'total_TTC',
         'TVA_rate',
-        'devi_date',
+        'discount',
+        'note',
+        'status',
         'created_by',
         'updated_by',
+        'entreprise_id',
         'client_id'
     ];
 
     public function client()
     {
         return $this->belongsTo(Client::class);
+    }
+
+    public function entreprise(){
+        return $this->belongsTo(Entreprise::class);
     }
 
     public function devisLines()
