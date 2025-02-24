@@ -173,6 +173,7 @@ class ReceptionController extends Controller
 
                 // Ligne de reception
                 'reception_lines' => 'required|array|min:1',
+                'reception_lines.*.id' => 'nullable',
                 'reception_lines.*.designation' => 'nullable|string|max:255',
                 'reception_lines.*.quantity' => 'nullable|numeric',
                 'reception_lines.*.width' => 'nullable|numeric',
@@ -186,6 +187,7 @@ class ReceptionController extends Controller
                 'reception_lines.*.totalTTC' => 'nullable|numeric',
                 'reception_lines.*.product_id' => 'nullable|exists:products,id',
                 'reception_lines.*.stock_id' => 'nullable|exists:stocks,id',
+                'reception_lines.*.reception_id' => 'nullable|exists:receptions,id',
             ], [
                 'reception_number.string' => 'Le champ : Numéro de réception doit être une chaîne de caractères.',
                 'reception_number.max' => 'Le champ : Numéro de réception ne doit pas dépasser 255 caractères.',
@@ -211,7 +213,7 @@ class ReceptionController extends Controller
                 'reception_lines.required' => 'Au moins une ligne de reception est requise.',
                 'reception_lines.array' => 'Les lignes de reception doivent être sous forme de tableau.',
                 'reception_lines.min' => 'Il faut au moins une ligne de reception.',
-                'reception_lines.*.id.required' => 'L\'ID de la ligne de reception est obligatoire.',
+                // 'reception_lines.*.id.required' => 'L\'ID de la ligne de reception est obligatoire.',
                 'reception_lines.*.designation.string' => 'Le champ : Désignation doit être une chaîne de caractères.',
                 'reception_lines.*.designation.max' => 'Le champ : Désignation ne doit pas dépasser 255 caractères.',
                 'reception_lines.*.quantity.numeric' => 'Le champ : Quantité doit être un nombre.',
@@ -228,6 +230,7 @@ class ReceptionController extends Controller
                 'reception_lines.*.totalTTC.numeric' => 'Le champ : Montant TTC total doit être un nombre.',
                 'reception_lines.*.product_id.exists' => 'Le champ : Produit doit correspondre à un produit existant',
                 'reception_lines.*.stock_id.exists' => 'Le champ : Stock doit correspondre à un stock existant',
+                'reception_lines.*.reception_id.exists' => 'La reception sélectionné n\'existe pas.',
             ]);
 
             $reception->update($request->all());

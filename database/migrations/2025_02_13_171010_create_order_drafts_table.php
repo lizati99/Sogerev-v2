@@ -13,20 +13,25 @@ return new class extends Migration
     {
         Schema::create('order_drafts', function (Blueprint $table) {
             $table->id();
-            $table->string('numero');
-            $table->string('title');
-            $table->text('sujet');
-            $table->double('total_HT');
-            $table->double('total_TVA');
-            $table->double('total_TTC');
-            $table->double('TVA_rate');
-            $table->date('orderDraft_date');
-            $table->string('status');
-            $table->foreignId('created_by')->constrained('users')->cascadeOnDelete()->cascadeOnUpdate();
-            $table->foreignId('updated_by')->constrained('users')->cascadeOnDelete()->cascadeOnUpdate();
-            $table->foreignId('devi_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
-            $table->foreignId('client_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
-
+            $table->string('numero')->nullable();
+            $table->string('title')->nullable();
+            $table->text('subject')->nullable();
+            $table->date('orderDraft_date')->nullable();
+            $table->date('expiration_date')->nullable();
+            $table->decimal('total_HT')->nullable();
+            $table->decimal('total_TVA')->nullable();
+            $table->decimal('total_TTC')->nullable();
+            $table->integer('TVA_rate')->nullable();
+            $table->decimal('discount')->nullable();
+            $table->text('note')->nullable();
+            $table->string('status')->nullable();
+            $table->boolean('isfinishing')->default(false);
+            $table->foreignId('created_by')->nullable()->constrained('users')->nullOnDelete();
+            $table->foreignId('updated_by')->nullable()->constrained('users')->nullOnDelete();
+            $table->foreignId('devi_id')->constrained('devis')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignId('entreprise_id')->nullable()->constrained('entreprises')->nullOnDelete();
+            $table->foreignId('client_id')->nullable()->constrained('clients')->nullOnDelete();
+            $table->foreignId('payment_type_id')->nullable()->constrained('payment_types')->nullOnDelete();
             $table->timestamps();
         });
     }

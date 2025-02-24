@@ -139,6 +139,7 @@ class DeviController extends Controller
     public function update(Request $request, string $id)
     {
         $devi = Devi::findOrFail($id);
+
         $validatedData = $request->validate([
             // devis
             'devis_number' => 'nullable|string|max:255',
@@ -159,7 +160,7 @@ class DeviController extends Controller
 
             // ligne devis
             'devis_lines' => 'required|array|min:1',
-            'devis_lines.*.id' => 'required',
+            'devis_lines.*.id' => 'nullable',
             'devis_lines.*.designation' => 'nullable|string|max:255',
             'devis_lines.*.quantity' => 'nullable|numeric|min:0',
             'devis_lines.*.unit_price_HT' => 'nullable|numeric|min:0',
@@ -168,7 +169,7 @@ class DeviController extends Controller
             'devis_lines.*.total_HT' => 'nullable|numeric|min:0',
             'devis_lines.*.total_TTC' => 'nullable|numeric|min:0',
             'devis_lines.*.product_id' => 'nullable|exists:products,id',
-            'devis_lines.*.devi_id' => 'nullable|exists:devis_lines,id',
+            'devis_lines.*.devi_id' => 'nullable|exists:devis,id',
         ], [
             // Devis
             'devis_number.string' => 'Le numéro du devis doit être une chaîne de caractères.',
@@ -193,7 +194,7 @@ class DeviController extends Controller
             'devis_lines.required' => 'Au moins une ligne de devis est requise.',
             'devis_lines.array' => 'Les lignes de devis doivent être sous forme de tableau.',
             'devis_lines.min' => 'Il faut au moins une ligne de devis.',
-            'devis_lines.*.id.required' => 'L\'ID de la ligne de devis est obligatoire.',
+            // 'devis_lines.*.id.required' => 'L\'ID de la ligne de devis est obligatoire.',
             'devis_lines.*.designation.string' => 'La désignation doit être une chaîne de caractères.',
             'devis_lines.*.designation.max' => 'La désignation ne doit pas dépasser 255 caractères.',
             'devis_lines.*.quantity.numeric' => 'La quantité doit être un nombre.',
@@ -210,7 +211,6 @@ class DeviController extends Controller
             'devis_lines.*.total_TTC.min' => 'Le total TTC doit être positif.',
             'devis_lines.*.product_id.required' => 'Le produit est obligatoire.',
             'devis_lines.*.product_id.exists' => 'Le produit sélectionné n\'existe pas.',
-            'devis_lines.*.devi_id.required' => 'Le devis est obligatoire.',
             'devis_lines.*.devi_id.exists' => 'Le devis sélectionné n\'existe pas.',
         ]);
 
@@ -221,7 +221,6 @@ class DeviController extends Controller
 
         foreach ($validatedData['devis_lines'] as $ligne) {
             if (isset($ligne['id']) && in_array($ligne['id'], $existingLigneIds)) {
-
                 DevisLine::where('id', $ligne['id'])->update($ligne);
                 $newLigneIds[] = $ligne['id'];
             } else {
